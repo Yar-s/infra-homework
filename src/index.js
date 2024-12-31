@@ -18,3 +18,6 @@ if (globalThis.IS_STAGE) {
 function add(a, b) {
   return a + b;
 }
+
+const FOO = (X, Y) => () => console.log({ X, Y })
+
