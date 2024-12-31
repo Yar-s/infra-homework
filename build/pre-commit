@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# This file should be moved to .git/hooks
+
+node build/lint-fs
