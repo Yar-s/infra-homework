@@ -34,13 +34,24 @@ async function test() {
     await Page.enable();
 
     // Нужно перейти на localhost:3000, дождаться инициализации DOM и вызвать нужные команды
-    await Page.navigate({ url: '' });
+    await Page.navigate({ url: 'http://localhost:3000' });
     await Page.loadEventFired();
     await client.DOM.enable();
 
-    const result = '?';
+    // Easier solution would be to use Runtime.evaluate({ expression: 'js_code' })
+    
+    const document = await client.DOM.getDocument();
+    const queriedNode = await client.DOM.querySelector({ nodeId: document.root.nodeId, selector: '#root'});
+    const jsNode = await client.DOM.resolveNode({ nodeId: queriedNode.nodeId });
+    const functionResult = await client.Runtime.callFunctionOn({
+      objectId: jsNode.object.objectId,
+      arguments: [{ objectId: jsNode.object.objectId }],
+      functionDeclaration: '(element) => element.innerText'
+    });
+    const result = functionResult.result.value;
 
     assert.equal(result, expected);
+    console.log('SUCCESS');
 
   } catch (err) {
     console.error(err);
