@@ -39,7 +39,7 @@ jobs:
       - run: yarn run linters
 
   deploy:
-    needs: build
+    needs: [dependencies, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
