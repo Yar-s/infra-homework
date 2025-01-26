@@ -11,7 +11,10 @@
     "test:yaml": "node test/yaml.js",
     "test:github": "node test/github.js",
     "test:gitlab": "node test/gitlab.js",
+    "test:docker": "node test/docker.js",
+    "test:kuber": "node test/kuber.js",
     "test:cdp": "node test/cdp.js",
+    "test:deploy": "node test/deploy.js",
     "build": "webpack --mode=development && echo 'Build completed'",
     "linters": "eslint ./src && echo 'Linters completed'",
     "deploy": "echo deploy && echo 'Deploy completed'"
@@ -22,6 +25,7 @@
   "description": "homework tasks for frontend infra course",
   "packageManager": "yarn@4.5.3",
   "dependencies": {
+    "@kubernetes/client-node": "1.0.0",
     "@types/eslint": "9.6.1",
     "@types/node": "22.10.1",
     "@yarnpkg/core": "4.1.6",
